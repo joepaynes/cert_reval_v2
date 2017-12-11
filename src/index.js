@@ -13,12 +13,11 @@ import thunk from 'redux-thunk';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 
+//Components
+import Landing from "./components/landing";
+import Dashboard from "./components/dashboard";
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-
-//Components
-import Landing from 
-
 
 ReactDOM.render(
 
