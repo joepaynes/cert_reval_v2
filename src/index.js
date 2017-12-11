@@ -25,7 +25,7 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
         <Router history={history}>
             <Switch>
-                <Route exact path ='/' component={Landing} >
+                <Route exact path ='/' component={Landing} />
                 <Route path='/dashboard' component={Dashboard} />
             </Switch>
         </Router>
