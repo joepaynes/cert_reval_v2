@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 // MOCK UP COMPONENT
 
-class Landing extends Component {
+class Dashboard extends Component {
     render() {
         return (
             <div>
-                Landing
+                Dashboard
             </div>
         )
     }
 }
 
-export default Landing;
+export default Dashboard;
