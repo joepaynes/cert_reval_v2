@@ -1,0 +1,10 @@
+@mixin clearfix {
+    // applies a pseudo element that clears floats
+    &::after {
+        // have to give the after pseudo element some form of content or else it wont appear on the page. We have it empty because we want 
+        // it to be there but not see it
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
