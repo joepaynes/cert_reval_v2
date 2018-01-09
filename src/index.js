@@ -18,17 +18,29 @@ import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 
 //Components (UP HERE BECAUSE THE IMPORT STATEMENTS HAVE TO BE ABOVE EVERYTHING)
+
+//HOCS
+import requireAuth from "./components/require_auth"
+//PAGES
 import Landing from "./components/landing";
 import Dashboard from "./components/dashboard";
+import SignIn from "./components/signin";
+import SignUp from "./components/signup";
+import SignOut from "./components/signout";
+
+//TYPES
+
 
 // ==========================================================================
 //                  FIREBASE, REACT-REDUX-FIREBASE SETUP
 // ==========================================================================
 
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import { reactReduxFirebase } from 'react-redux-firebase';
 import { reduxFirestore } from 'redux-firestore';
 import firebase from 'firebase';
 import 'firebase/firestore';
+// For the brief auth logic in this file
+import 'firebase/auth';
 
 //Initialization
 const firebaseConfig = {
@@ -49,19 +61,20 @@ firebase.firestore();
 //Redux firebase config, the nodes that we want to be pulling off of and refering to within the app.
 //So for us the each user node will contain shit the certificates and shit.
 const reduxFirebaseConfig = {
-    userProfile: "users",
+    userProfile: "users",  // firebase root where the user profiles are stored.
 };
 // ==========================================================================
 //                  REDUX STORE SETUP W/ FIREBASE + FIRESTORE
 // ==========================================================================
 
 const newStore = compose (
+    applyMiddleware(thunk),
     reactReduxFirebase(firebaseApp, reduxFirebaseConfig),
     reduxFirestore(firebaseApp),
 )(createStore)
 
-const initialState = {};
-const store = newStore(reducers, initialState);
+const store = newStore(reducers);
+
 // ==========================================================================
 //                          REACTDOM RENDER
 // ==========================================================================
@@ -71,7 +84,10 @@ ReactDOM.render(
         <Router history={history}>
             <Switch>
                 <Route exact path ='/' component={Landing} />
-                <Route path='/dashboard' component={Dashboard} />
+                <Route path='/dashboard' component={requireAuth(Dashboard)} />
+                <Route path='/signin' component={SignIn} />
+                <Route path='/signup' component={SignUp} />
+                <Route path="/signout" component={SignOut} />
             </Switch>
         </Router>
     </Provider>
@@ -82,3 +98,5 @@ registerServiceWorker();
 // ==========================================================================
 //                              EXPORTS
 // ==========================================================================
+
+export const auth = firebase.auth()
