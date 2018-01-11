@@ -3,22 +3,15 @@ import React, { Component } from 'react';
 //REACT-ROUTER-DOM
 import { Link } from 'react-router-dom';
 
+//COMPONENTS
+import Header from "./header"
+
 class Landing extends Component {
   render() {
     return (
         
       <div className="landing">
-       <header>
-         <div className="header">
-           <div className="header__logo-box">
-             <img src="img/logo.png" alt="Certify Banner" className="header__logo"/>
-           </div>
-           <div className="header__auth-buttons">
-               <Link to="/signin" className="header__auth-buttons--signin"> Sign In </Link>
-               <Link to="/signup" className="header__auth-buttons--signup"> Sign Up </Link>
-           </div>
-         </div>
-       </header>  
+       <Header/>  
         <main> 
           <div className="landing__left-side u-text-align-center">
             <h1 className="heading-huge heading-huge--landing"> <span className="u-bold"> All </span> of your certificates <br/> and qualifications in one place</h1>

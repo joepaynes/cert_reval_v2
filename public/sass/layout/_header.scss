@@ -30,23 +30,25 @@
         pointer-events: auto;
         padding-top: 2rem;
 
-        &--signin{
+        &--signin
+        &--signup {
             margin-right: 5rem;
         }
 
         &--signin,
-        &--signup {
+        &--signup, 
+        &--signout {
             &,
             &:link,
             &:active {
                 padding: 1rem;
                 text-decoration: none;
-                color: $color-white;
+                color: $color-red;
             }
 
             &:hover {
-                color: $color-white;
-                border-bottom: 1px solid $color-white;
+                color: $color-red;
+                border-bottom: 1px solid $color-red;
             }
             
         }

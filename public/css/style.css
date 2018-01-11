@@ -170,15 +170,15 @@ body {
     z-index: 2;
     pointer-events: auto;
     padding-top: 2rem; }
-    .header__auth-buttons--signin {
+    .header__auth-buttons--signin .header__auth-buttons--signup {
       margin-right: 5rem; }
-    .header__auth-buttons--signin, .header__auth-buttons--signin:link, .header__auth-buttons--signin:active, .header__auth-buttons--signup, .header__auth-buttons--signup:link, .header__auth-buttons--signup:active {
+    .header__auth-buttons--signin, .header__auth-buttons--signin:link, .header__auth-buttons--signin:active, .header__auth-buttons--signup, .header__auth-buttons--signup:link, .header__auth-buttons--signup:active, .header__auth-buttons--signout, .header__auth-buttons--signout:link, .header__auth-buttons--signout:active {
       padding: 1rem;
       text-decoration: none;
-      color: #fff; }
-    .header__auth-buttons--signin:hover, .header__auth-buttons--signup:hover {
-      color: #fff;
-      border-bottom: 1px solid #fff; }
+      color: #f1410b; }
+    .header__auth-buttons--signin:hover, .header__auth-buttons--signup:hover, .header__auth-buttons--signout:hover {
+      color: #f1410b;
+      border-bottom: 1px solid #f1410b; }
 
 .landing {
   height: 100vh;
