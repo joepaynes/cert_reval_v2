@@ -5,15 +5,19 @@
     padding: 0;
     box-sizing: inherit;
 }
-    /* box-sizing: border-box changes the box model so that 
-       border and padding are no longer added to the total width/height we specify for a box */
-/* ===================================== */
-
 
 html {
     font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
 }
 
 body {
     box-sizing: border-box;
+    position: relative;
+}
+
+section {
+    margin: 0;
 }

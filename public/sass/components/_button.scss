@@ -3,27 +3,33 @@
     &,
     &:link,
     &:visited {
+        display: inline-block;
+        height: 5rem;
+        width: 20rem;
+        border-radius: 2rem;
         text-decoration: none;
-        transition: all .2s;
-        cursor: pointer;
-        color: $color-grey-dark-2;;
-        }
+        font-size: 2rem;
+        text-transform: uppercase;
+        transition: all .2s
+    }
 
     &:hover {
-        border: 2px solid $color-green;
-        color: $color-green;
-        box-shadow: 0 1rem 2rem rgba($color-black, .2);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);
     }
 
-    &:active,
-    &:focus {
-        outline: none;
-        box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+    &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2)
     }
 
-   
-    
+    &-orange {
+        background-color: $color-orange;
+        color: $color-white;
+    }
+
+    &-video {
+        padding-top: 1.5rem;
+    }
+
 }
-    
-    
-

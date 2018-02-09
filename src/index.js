@@ -15,7 +15,7 @@ import thunk from 'redux-thunk';
 
 //React-Router Setup
 import { Router, Route, Switch } from 'react-router-dom';
-import history from './history';
+import { history } from "./history";
 
 //Components (UP HERE BECAUSE THE IMPORT STATEMENTS HAVE TO BE ABOVE EVERYTHING)
 
@@ -27,9 +27,6 @@ import Dashboard from "./components/dashboard";
 import SignIn from "./components/signin";
 import SignUp from "./components/signup";
 import SignOut from "./components/signout";
-
-//TYPES
-
 
 // ==========================================================================
 //                  FIREBASE, REACT-REDUX-FIREBASE SETUP
@@ -99,4 +96,5 @@ registerServiceWorker();
 //                              EXPORTS
 // ==========================================================================
 
-export const auth = firebase.auth()
+export const auth = firebase.auth();
+export const db = firebase.firestore();

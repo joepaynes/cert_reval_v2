@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import history from "../history"
+import { history } from "../history"
 // Refactor these imports later on? \/
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -13,13 +13,14 @@ export default function (ComposedComponent) {
 
         // When component first mounts.
         componentWillMount() {
-            firebase.auth().onAuthStateChanged(function(user){
+            var unsubscribe = firebase.auth().onAuthStateChanged(function(user){
                 if(!user) {
-                   history.push("/signin")
+                    history.push("/signin")
                 }
+            unsubscribe();
             })
         }
-        
+
         render() {
         return ( <ComposedComponent {...this.props} /> )
         }
