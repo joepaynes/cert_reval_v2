@@ -12,9 +12,9 @@ class SignOut extends Component {
 
     render() {
         return (
-            <Container text style={{ marginTop: '10em' }}>
-                <Header as="h1" textAlign={"center"}> You are now signed out </Header>
-             </Container>
+            <div className="row">
+                <h1>You are now signed out </h1>
+            </div>
         )
     }
 

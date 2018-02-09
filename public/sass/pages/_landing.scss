@@ -1,0 +1,187 @@
+.section-video {
+    background-color: $color-black;
+    height: 100vh;
+    position: relative;
+}
+
+.section-banner {
+    height: 25rem;
+    background-color: #ecf0f1
+}
+
+.section-industries {
+    height: 75rem;
+    position: relative;
+}
+
+.landing {
+
+    &__jumbotron-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 30vh;
+        width: 100%;
+        text-align: center;
+        color: $color-white;
+    }
+
+    &__left-text-box {
+        padding: 5rem;
+        float: left;
+        height: 100%;
+        width: 35%;
+    }
+
+    &__left-heading {
+        font-size: 3.7rem;
+        font-weight: 100;
+    }
+
+    &__form-container {
+        height: 100%;
+        width: 65%;
+        float: left;
+    }
+
+    &__input-container {
+        margin: 0;
+        padding: 5rem 0;
+        width: 60%;
+        text-align: center;
+        display: inline-block;
+    }
+
+    &__social-container {
+        display: table;
+        width: 100%;
+        text-align: left;
+        font-size: $default-font-size;
+        font-weight: 300;
+        margin-top: 2rem;
+    }
+
+    &__social-text {
+        display: table-cell;
+        vertical-align: middle;
+        width: 25%;
+        font-weight: 300;
+        padding-left: 2rem;
+        padding-top: .5rem;
+    }
+
+    &__social-links {
+        width: 100%;
+        float: right;
+        padding: 5px;
+        text-align: left;
+    }
+    
+    &__input {
+        padding: 2rem 2rem;
+        border-radius: 3px;
+        height: 5rem;
+        width: 100%;
+        font-size: 2rem;
+        opacity: .75;
+        font-family: inherit;
+        font-size: $default-font-size;
+        background-color: #ecf0f1;
+        color: $color-black;
+        border: none;
+        border-bottom: 2px solid $color-black;
+        margin: 0;
+        margin-bottom: 1rem;
+    
+
+        &::-webkit-input-placeholder {
+            color: $color-black
+        }
+
+        &:focus:invalid {
+            border-bottom: 2px solid $color-red;
+        }
+
+
+
+        &:focus:valid {
+            border-bottom: 2px solid $color-green;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__label {
+        text-align: left;
+        display: block;
+        padding-left: 2rem;
+        padding-top: .5rem;
+        font-weight: 300;
+        font-family: 'Roboto', sans-serif;
+        font-size: $default-font-size;
+        transition: all, .3s;
+    }
+
+    &__input:placeholder-shown + &__label {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+    &__button-container {
+        padding: 10rem 0;
+        margin-right: 7rem;
+        float: right;
+        height: 100%;
+        width: 25%;
+        text-align: center;
+    }
+
+    &__grid-picture {
+        display: inline-block;
+        height: 100%;
+        width: 25%;
+        background-size: cover;
+        
+        &--1 {
+            background-image: url("../../img/pilot.jpg");
+        }
+
+        &--2 {
+            background-image: url("../../img/susie.png");
+        }
+
+        &--3 {
+            background-image: url("../../img/car.jpg");
+        }
+
+        &--4 {
+            background-image: url("../../img/waterside.jpg");
+        }
+
+    }
+
+    &__industries-text-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 10rem;
+        width: 100%;
+    }
+
+    &__industries-text {
+        font-size: 1000%;
+        color: $color-orange;
+        font-weight: 100;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+}
+
+
+

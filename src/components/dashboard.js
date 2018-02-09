@@ -3,6 +3,8 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from 'react-redux-firebase';
 
+import { Link } from "react-router-dom";
+
 import Header from "./header"
 
 // MOCK UP COMPONENT
@@ -13,16 +15,16 @@ class Dashboard extends Component {
         console.log(this.props.test)
         return (
             <div>
-                <Header />
-                Dashboard
+                <p> Dashboard </p>
+                <Link to="/signout"> Sign out </Link>
             </div>   
         )
     }
 }
 
 export default compose(
-    firestoreConnect(['users']), 
-    connect((state, props) => ({
+    firestoreConnect(['users', 'messages']), 
+    connect((state) => ({
         user: state.firestore.data,
         test: state
     })),
