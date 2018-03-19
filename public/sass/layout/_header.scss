@@ -35,7 +35,7 @@
     }
 
     &__link:link,
-    &__link:visited, {
+    &__link:visited {
         display: inline-block;
         margin-right: 5rem;
         margin-top: 4.05rem;
@@ -46,12 +46,22 @@
         text-transform: uppercase;
         text-decoration: none;
         border-bottom: 1px solid transparent;
-        transition: border .2s
+        transition: border .2s;
+
+        &--black {
+            color: $color-black;
+        }
+
     }
 
     &__link:hover,
     &__link:active {
         border-bottom: 1px solid $color-white;
+
+        &--black {
+            border-bottom: 1px solid $color-black;
+        }
+
     }
 
     &__link:last-child {

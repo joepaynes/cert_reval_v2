@@ -9,9 +9,12 @@
 
 @import "components/_background-video.scss";
 @import "components/_button.scss";
+@import "components/_side-menu.scss";
 
 @import "layout/_footer.scss";
 @import "layout/_header.scss";
 
+@import "pages/_dashboard.scss";
 @import "pages/_landing.scss";
+@import "pages/_loader.scss";
 @import "pages/_signin.scss";

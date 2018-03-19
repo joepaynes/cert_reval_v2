@@ -1,5 +1,5 @@
 // ==========================================================================
-//          REACT, REDUX, COMPONENTS AND OTHER RELATED PACKAGES
+// REACT, REDUX, COMPONENTS AND OTHER RELATED PACKAGES
 // ==========================================================================
 
 // React Setup
@@ -7,37 +7,43 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 
+// Components
+import App from "./app"
+import Loader from "./components/loader"
+
+// Firebase and Firestore
+import firebase from 'firebase';
+import 'firebase/firestore';
+
 // Redux Setup
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 
-//React-Router Setup
-import { Router, Route, Switch } from 'react-router-dom';
-import { history } from "./history";
-
-//Components (UP HERE BECAUSE THE IMPORT STATEMENTS HAVE TO BE ABOVE EVERYTHING)
-
-//HOCS
-import requireAuth from "./components/require_auth"
-//PAGES
-import Landing from "./components/landing";
-import Dashboard from "./components/dashboard";
-import SignIn from "./components/signin";
-import SignUp from "./components/signup";
-import SignOut from "./components/signout";
+// Redux Persist
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
 
 // ==========================================================================
-//                  FIREBASE, REACT-REDUX-FIREBASE SETUP
+// REDUX STORE SETUP 
 // ==========================================================================
 
-import { reactReduxFirebase } from 'react-redux-firebase';
-import { reduxFirestore } from 'redux-firestore';
-import firebase from 'firebase';
-import 'firebase/firestore';
-// For the brief auth logic in this file
-import 'firebase/auth';
+    const persistConfig = {
+        key: "root",
+        storage,
+        debug: true,
+    }
+
+    const persistedReducer = persistReducer(persistConfig, reducers);
+    const storeEnhancer = compose(applyMiddleware(thunk));
+    let store = createStore(persistedReducer, storeEnhancer)
+    let persistor = persistStore(store)
+
+// ==========================================================================
+// FIREBASE, FIRESTORE SETUP
+// ==========================================================================
 
 //Initialization
 const firebaseConfig = {
@@ -55,40 +61,20 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 // intialize firestore
 firebase.firestore();
 
-//Redux firebase config, the nodes that we want to be pulling off of and refering to within the app.
-//So for us the each user node will contain shit the certificates and shit.
-const reduxFirebaseConfig = {
-    userProfile: "users",  // firebase root where the user profiles are stored.
-};
 // ==========================================================================
-//                  REDUX STORE SETUP W/ FIREBASE + FIRESTORE
+// REACTDOM RENDER
 // ==========================================================================
 
-const newStore = compose (
-    applyMiddleware(thunk),
-    reactReduxFirebase(firebaseApp, reduxFirebaseConfig),
-    reduxFirestore(firebaseApp),
-)(createStore)
-
-const store = newStore(reducers);
-
-// ==========================================================================
-//                          REACTDOM RENDER
-// ==========================================================================
+function onBeforeLift() {
+    console.log("Running")
+}
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Switch>
-                <Route exact path ='/' component={Landing} />
-                <Route path='/dashboard' component={requireAuth(Dashboard)} />
-                <Route path='/signin' component={SignIn} />
-                <Route path='/signup' component={SignUp} />
-                <Route path="/signout" component={SignOut} />
-            </Switch>
-        </Router>
+        <PersistGate loading={<Loader />} persistor={persistor} onBeforeLift= { onBeforeLift }>
+            <App /> 
+        </PersistGate>
     </Provider>
-
     ,document.getElementById('root'));
 registerServiceWorker();
 
@@ -98,3 +84,4 @@ registerServiceWorker();
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const savedStore = persistor

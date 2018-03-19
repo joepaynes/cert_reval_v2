@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom"
 
-// Parallax Effect
-import Parallax from "parallax-js"
-
 class Landing extends Component {
 
   render() {
@@ -48,7 +45,7 @@ class Landing extends Component {
             <form>
               <div className="landing__input-container">
                 <input className="landing__input" type="email" placeholder="Email Address" id="email" />
-                <label className="landing__label" for="email">Email Address </label>
+                <label className="landing__label" htmlFor="email">Email Address </label>
                 <div className="landing__social-container">
                   <h4 className="landing__social-text">Sign up with:</h4>
                   <div className="landing__social-links">
@@ -111,10 +108,4 @@ class Landing extends Component {
   }
 }
 
-
 export default Landing
-
-
-{/* <img src="img/ben-neale-210891.jpg"/>
-<img src="img/ship-port-city-maritime-39820.png"/>
-<img src="img/zell-431348.jpg"/> */ }
