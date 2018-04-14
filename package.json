@@ -15,7 +15,7 @@
     "redux": "^3.7.2",
     "redux-firestore": "^0.2.0",
     "redux-form": "^7.1.2",
-    "redux-persist": "^4.8.2",
+    "redux-persist": "^5.7.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.77.1"
   },

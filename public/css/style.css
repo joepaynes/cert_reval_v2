@@ -25,7 +25,6 @@ h1 {
   font-size: 3.5rem;
   text-transform: uppercase;
   font-weight: 100;
-  line-height: 5px;
   margin-bottom: 3rem; }
 
 .heading-tertiary {
@@ -68,6 +67,9 @@ a:visited {
 .u-no-bottom-margin {
   margin-bottom: 0 !important; }
 
+.u-black-font {
+  color: #000 !important; }
+
 .background-video {
   position: absolute;
   right: 0;
@@ -105,6 +107,41 @@ a:visited {
 
 .button-video {
   padding-top: 1.5rem; }
+
+.side-menu {
+  height: 100vh;
+  width: 20%;
+  float: left;
+  background-color: #262f3d; }
+  .side-menu__logo-box {
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    padding: 10px; }
+  .side-menu__logo {
+    padding-top: 10px;
+    width: auto;
+    height: 100%; }
+  .side-menu__links-container {
+    height: 50%;
+    width: 100%;
+    padding: 25%; }
+  .side-menu__links-list {
+    list-style: none;
+    color: white;
+    font-size: 200%; }
+  .side-menu__link {
+    margin-bottom: 50px; }
+    .side-menu__link--button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      border-bottom: 2px solid transparent;
+      transition: border .2s; }
+    .side-menu__link--button:focus {
+      outline: none; }
+    .side-menu__link--button:hover {
+      border-bottom: 2px solid white; }
 
 .footer {
   height: 30rem;
@@ -194,10 +231,35 @@ a:visited {
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border .2s; }
+    .header__link:link--black, .header__link:visited--black {
+      color: #000; }
   .header__link:hover, .header__link:active {
     border-bottom: 1px solid #fff; }
+    .header__link:hover--black, .header__link:active--black {
+      border-bottom: 1px solid #000; }
   .header__link:last-child {
     margin-right: 7rem; }
+
+.dashboard {
+  height: 100vh;
+  width: 100%; }
+  .dashboard__header {
+    height: 100px;
+    width: 80%;
+    float: right;
+    background-color: #e67e22; }
+    .dashboard__header__profile-box {
+      float: right;
+      height: 100%;
+      font-size: 170%;
+      padding: 20px; }
+  .dashboard__content-container {
+    width: 80%;
+    float: right;
+    height: 100%; }
+
+.certificate-container {
+  height: 100%; }
 
 .section-video {
   background-color: #000;
@@ -340,6 +402,20 @@ a:visited {
   color: #e67e22;
   font-weight: 100;
   text-transform: uppercase;
+  text-align: center; }
+
+.loader {
+  background-color: black;
+  position: relative; }
+  .loader__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: 100; }
+
+.intro-container {
   text-align: center; }
 
 .auth-form__background {

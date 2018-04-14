@@ -5,7 +5,13 @@ import { db } from "../index"
 
 import {
     AUTH_ERROR,
-    CLEAR_AUTH_ERROR
+    CLEAR_AUTH_ERROR,
+    USER_UID,
+    USER_EMAIL,
+    INTRO_ACTIVE,
+    INTRO_UNACTIVE,
+    USER_OBJECT,
+    USER_LOADED
 } from "../actions/types"
 
 // ============================================================================================================
@@ -23,16 +29,21 @@ export function SignUpUser ( {email, password} ) {
       // New sign-in will be persisted with session persistence.
       return firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(response){
-        // MAKE A DOCUMENT IN THE USER COLLECTION WITH THE USER'S UID IN AS THE DOCUMENT 
-        // AND THEIR EMAIL ADDRESS AS THE FIRST ENTRY.
-            let email = response.email;
-            let UID = response.uid
-            db.collection("users").doc(UID).set({
-                email: email,
-                UID: UID,
-            });
-        // PUSH THEM TO THE DASHBOARD
-            history.push("/dashboard");
+        // ========================
+        // SUCCESSFUL SIGNUP LOGIC
+        // ========================
+            // 1) SAVE UID TO STATE 
+                let uid = response.uid
+                dispatch({ type: USER_UID, payload: uid})
+                
+            // 2) SET STATE TO INTRODUCTION/TUTORIAL ISLAND
+                dispatch({ type: INTRO_ACTIVE })
+
+            // 2) SET USER LOADED FLAG TO FALSE
+                dispatch({ type: USER_LOADED, payload: false })
+
+            // 3) PUSH THEM TO THE DASHBOARD
+                history.push("/dashboard");
       })
       .catch(function(error){
           console.log(error)
@@ -61,9 +72,18 @@ export function SignInUser ( {email, password} ) {
       // New sign-in will be persisted with session persistence.
       return firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function(response){
-        // SAVE USERS UID TO LOCAL STORAGE TO USE TO THEN WRITE TO FIRESTORE
-            localStorage.setItem("UID", response.uid)
-        // PUSH THEM TO THE DASHBOARD
+        // ========================
+        // SUCCESSFUL SIGNIN LOGIC
+        // ========================
+            // 1 ) SAVE UID TO USER REDUCER
+                let uid = response.uid
+                dispatch({ type: USER_UID, payload: uid })
+            // 2 ) SET USER LOADED FLAG TO FALSE
+                dispatch({ type: USER_LOADED, payload: false })
+            
+            // 3 ) FETCH CERT DATA AND SAVE TO CERT REDUCER
+
+            // PUSH THEM TO THE DASHBOARD
             history.push("/dashboard");
       })
       .catch(function(error){
@@ -113,3 +133,27 @@ export function clearAuthError() {
     }
 }
 
+export function endIntro() {
+    return function(dispatch) {
+        dispatch({ type: INTRO_UNACTIVE })
+    }
+}
+
+export function saveToState(obj) {
+    let userObject = obj
+    return function(dispatch){
+        dispatch({
+            type: USER_OBJECT,
+            payload: userObject
+        })
+    }
+}
+
+export function userLoaded() {
+    return function(dispatch) {
+        dispatch({
+            type: USER_LOADED,
+            payload: true
+        })
+    }
+}

@@ -4,6 +4,7 @@
 
 // Placeholder while we figure this shit out
 
+// AUTH TYPES
 import {
     AUTH_USER,
     UNAUTH_USER,
