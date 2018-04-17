@@ -28,29 +28,25 @@ class Dashboard extends Component {
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
     }
 
+    componentDidMount() {
+         // Only run fetchdata if the dashboard is in loading state AND data hasn't been previously saved to redux state
+         console.log(this.props.user.loaded)
+         if (this.state.loading === true && this.props.user.loaded === false) {
+            this.fetchData()
+            return ( <Loader/> )  
+        }
+    }
+
 
     render() {
         if(this.props.intro === true) {
             return(<IntroScreen/>)
         }
-        else { 
-            console.log(this.props.state)
-            return(this.renderDash())
-        }
-    }
-
-    renderDash() {
-        
-        // Only run fetchdata if the dashboard is in loading state AND data hasn't been previously saved to redux state
-        if (this.state.loading === true && this.props.user.loaded === false) {
-            this.fetchData()
-            return ( <Loader/> )  
-        }
-
-        else {  
+        else if (this.props.user.loaded === true) {  
             // REF \/
             let user = this.props.user.instance
             console.log(this.state.selected)
+            console.log(this.props.state)
             return (
                 <div className="dashboard">
                     <div className="dashboard__header clearfix">
@@ -84,7 +80,12 @@ class Dashboard extends Component {
                 </div>
             )
         }
-    }  
+        else {
+            return (<Loader />)
+            
+    } 
+
+    }
 
     renderContent() {
         if(this.state.selected === "home") {
