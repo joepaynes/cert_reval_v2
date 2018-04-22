@@ -12,7 +12,7 @@ import requireAuth from "./components/require_auth"
 import Landing from "./components/landing";
 import Dashboard from "./components/dashboard";
 import SignIn from "./components/signin";
-import SignUp from "./components/signup";
+import SignUp from "./components/signup"; 
 import SignOut from "./components/signout";
 
 class App extends Component {

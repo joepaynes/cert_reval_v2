@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { db } from "../index"
 import * as actions from "../actions"
+import _ from 'lodash'
 
 import { 
     USER_OBJECT
@@ -10,6 +11,7 @@ import {
 
 import IntroScreen from "./intro"
 import Loader from "./loader"
+import CertForm from "./certForm"
 
 // MOCK UP COMPONENT
 
@@ -18,8 +20,12 @@ class Dashboard extends Component {
     constructor(props) {
         super(props)
 
+
+        // Loading state will have to be completely relient on redux state, maybe have an initial load and then another load that says when
+        // the user object has been loaded. In fact you might only need one control from redux state, and different components can flag
+        // loading states when starting and ending operations, like updating, reading and writing to the database etc.
+
         this.state = {
-            loading: true,
             selected: "home",
         }
 
@@ -31,10 +37,18 @@ class Dashboard extends Component {
     componentDidMount() {
          // Only run fetchdata if the dashboard is in loading state AND data hasn't been previously saved to redux state
          console.log(this.props.user.loaded)
-         if (this.state.loading === true && this.props.user.loaded === false) {
+         if (this.props.user.loaded === false) {
             this.fetchData()
             return ( <Loader/> )  
         }
+    }
+
+    componentWillUpdate(nextProps) {
+        // Will run when adding, deleting, or modifying a certificate.
+        if (nextProps.user.loaded === false) {
+           this.fetchData()
+           return ( <Loader/> )  
+       }
     }
 
 
@@ -45,8 +59,6 @@ class Dashboard extends Component {
         else if (this.props.user.loaded === true) {  
             // REF \/
             let user = this.props.user.instance
-            console.log(this.state.selected)
-            console.log(this.props.state)
             return (
                 <div className="dashboard">
                     <div className="dashboard__header clearfix">
@@ -67,7 +79,6 @@ class Dashboard extends Component {
                         <div className="side-menu__links-container">
                             <ul className="side-menu__links-list">
                                 <li className="side-menu__link"><button onClick={this.handleClickHome} className="side-menu__link--button"> Home </button></li>
-                                <li className="side-menu__link"><button onClick={this.handleClickCerts} className="side-menu__link--button"> Certificates </button></li>
                                 <li className="side-menu__link"><button onClick={this.handleClickAddCert} className="side-menu__link--button"> Add Certificate </button> </li>
                             </ul>
                         </div>
@@ -82,51 +93,55 @@ class Dashboard extends Component {
         }
         else {
             return (<Loader />)
-            
-    } 
+        } 
 
     }
 
     renderContent() {
         if(this.state.selected === "home") {
-            return (
-                <h1 className="heading-primary"> HOME </h1>
-            )
-        }
-        if(this.state.selected === "certificates") {
-            this.fetchCerts()
-            return (
-                <div style={{textAlign: "center"}}>
-                    <h1 className="heading-primary"> CERTIFICATES </h1>
-                <div className="certificate-container">
-                    yo
+            let certArr = this.props.state.user.instance.certificates
+            let self = this
+            // Map through certificate array to pull out and display certificate objects
+            let certs = certArr.map(function(cert){
+               return(
+                <div className="certificate" key={cert.name}>
+                    <h2>{cert.name}</h2>
+                    <h3>{cert.issueDate}</h3>
+                    <button onClick={() => {
+                        // ===============
+                        // Delete Function
+                        // ===============
+                        console.log(self.props.state.user.instance.certificates)
+                        let certArray = self.props.state.user.instance.certificates
+                        let UID = self.props.state.user.instance.uid
+                        // Find the index number of the cert object by searching for name (can modify search later on)
+                        let indexNo = _.findIndex(certArray, function(o){return o.name === cert.name})
+                        // Remove the certificate object from the array.
+                        certArray.splice(indexNo, 1)
+                        // Update Database with new array
+                        db.collection("users").doc(UID).update({
+                            "certificates": certArray
+                        }).then(
+                            // Switch loading flag to load the new certificate array from db
+                            self.props.loadData()
+                        )
+
+                    }}> Delete </button>
                 </div>
-                </div>
-            )
+               )
+            })
+            return (
+                <div>{certs}</div>
+            );
         }
+
+        
+
         if(this.state.selected === "add-certificate") {
             return (
-                <h1 className="heading-primary"> ADD CERTIFICATE </h1>
+                <CertForm/> 
             )
         }
-    }
-
-    fetchCerts() {
-
-        let uid = this.props.user.uid
-
-        db.collection("users").doc(uid).collection("certificates")
-        .get()
-        .then(function(certs){
-            certs.forEach(function(cert){
-                console.log( cert.data() )
-            })
-        })
-        .catch(function(error) {
-            console.log("Error getting certificates: ", error);
-        });
-
-
     }
     
     fetchData() {
@@ -140,7 +155,6 @@ class Dashboard extends Component {
                 // Save data to redux state
                 this.props.saveToState(userObject)
                 this.props.userLoaded()
-                this.setState({ loading: false})
         })
         .catch(function(error){
             console.log("Error fetching data, ", error)

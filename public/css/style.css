@@ -108,6 +108,13 @@ a:visited {
 .button-video {
   padding-top: 1.5rem; }
 
+.certificate {
+  display: inline-block;
+  background-color: rgba(132, 216, 255, 0.8);
+  height: 100px;
+  width: 500px;
+  margin: 10px; }
+
 .side-menu {
   height: 100vh;
   width: 20%;

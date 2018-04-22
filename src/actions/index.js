@@ -80,10 +80,8 @@ export function SignInUser ( {email, password} ) {
                 dispatch({ type: USER_UID, payload: uid })
             // 2 ) SET USER LOADED FLAG TO FALSE
                 dispatch({ type: USER_LOADED, payload: false })
-            
-            // 3 ) FETCH CERT DATA AND SAVE TO CERT REDUCER
-
-            // PUSH THEM TO THE DASHBOARD
+    
+            // 3) PUSH THEM TO THE DASHBOARD
             history.push("/dashboard");
       })
       .catch(function(error){
@@ -154,6 +152,15 @@ export function userLoaded() {
         dispatch({
             type: USER_LOADED,
             payload: true
+        })
+    }
+}
+
+export function loadData() {
+    return function(dispatch) {
+        dispatch({
+            type: USER_LOADED,
+            payload: false
         })
     }
 }
