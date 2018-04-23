@@ -157,25 +157,42 @@ class Dashboard extends Component {
         moment().format();
         let now = moment().hour(0).minute(0).second(0).millisecond(0);
 
-        let certs = [];
-        let counter = [];
+        let oneYearEmail = [];
 
         db.collection("certs").get()
         .then(snapshot => {
+            let certs = [];
             snapshot.forEach(doc => {
                 certs.push(doc.data());
             });
+            console.log(certs);
+            return certs;
         })
-        .then(certs.forEach(list => {
-            let user = list.holders;
-            console.log(user);
-            let date = moment(user.issueDate);
-            var expiry = moment(date).add(certs.Validity, 'y');
-            var count = expiry.diff(now, 'y', true);
-            counter.push(count);
-        }));
-        console.log(certs);
-        console.log(counter);
+        .then(certs => {
+            certs.forEach(list => {
+            let holders = list.holders;
+            let name = list.name
+            console.log(holders);
+                holders.forEach(user => {
+                    let date = moment(user.issueDate);
+                    var expiry = moment(date).add(certs.Validity, 'y');
+                    var count = expiry.diff(now, 'y', true);
+                    console.log(count);
+                    if (count === -1) { // changing the number changes the expiry calculation
+                        oneYearEmail.push(
+                            {
+                                UID:    user.uid,
+                                Name:   name
+                            }
+                        );
+                    }
+                }) // End holders.forEach
+            }) // End certs.forEach
+            return ("Expiry Check Complete");
+        }) // End 2nd .then 
+        .then(test => {
+            console.log(oneYearEmail);
+        });
     }
 
 
