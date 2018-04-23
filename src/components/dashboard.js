@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { db } from "../index"
+import moment from "moment";
+import _ from "lodash";
 import * as actions from "../actions"
 
 import { 
@@ -89,7 +91,10 @@ class Dashboard extends Component {
     renderContent() {
         if(this.state.selected === "home") {
             return (
+                <div>
                 <h1 className="heading-primary"> HOME </h1>
+                <button onClick={this.expiryCheck}>Run Expiry Check</button>
+                </div>
             )
         }
         if(this.state.selected === "certificates") {
@@ -145,6 +150,34 @@ class Dashboard extends Component {
             console.log("Error fetching data, ", error)
         })
     }
+    //=====================
+    //TESTING
+    //=====================
+    expiryCheck() {
+        moment().format();
+        let now = moment().hour(0).minute(0).second(0).millisecond(0);
+
+        let certs = [];
+        let counter = [];
+
+        db.collection("certs").get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                certs.push(doc.data());
+            });
+        })
+        .then(certs.forEach(list => {
+            let user = list.holders;
+            console.log(user);
+            let date = moment(user.issueDate);
+            var expiry = moment(date).add(certs.Validity, 'y');
+            var count = expiry.diff(now, 'y', true);
+            counter.push(count);
+        }));
+        console.log(certs);
+        console.log(counter);
+    }
+
 
     handleClickHome() {
         this.setState({ selected: "home" })
