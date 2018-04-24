@@ -3,6 +3,7 @@ import { reduxForm, Field } from 'redux-form'
 import { connect } from "react-redux"
 import * as actions from "../actions"
 import { db, savedStore } from "../index"
+import moment from 'moment';
 
 
 class CertForm extends Component {
@@ -11,6 +12,12 @@ class CertForm extends Component {
         // grab uid and orignal certificate array from redux state
         let UID = this.props.user.uid;
         let certArray = this.props.user.instance.certificates
+        // calculate expiry date
+        let date = moment(values.issueDate);
+        let expiry = moment(date).add(values.validity, 'y');
+        values.expiryDate = moment(expiry).format("YYYY-MM-DD");
+        delete values.validity;
+
         // Push new cert to the array
         certArray.push(values);
         
@@ -43,6 +50,9 @@ class CertForm extends Component {
                     </div>
                     <div className="auth-form__form-field">
                         <Field component={renderField} type="text" name="name" placeholder="name" label="Name" />
+                    </div>
+                    <div className="auth-form__form-field">
+                        <Field component={renderField} type="number" name="validity" placeholder="5" label="Validity" />
                     </div>
                     <button type="submit" className="auth-form__button">Add Certificate</button>
                 </form>
