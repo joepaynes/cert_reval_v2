@@ -5,6 +5,7 @@
 import {
     USER_UID,
     USER_OBJECT,
+    USER_EMAIL,
     USER_LOADED
 } from "../actions/types"
 
@@ -16,6 +17,8 @@ export default function(state = {}, action) {
             return {...state, instance: action.payload }
         case USER_LOADED:
             return {...state, loaded: action.payload }
+        case USER_EMAIL:
+            return {...state, email: action.payload }
         }
         
     return state

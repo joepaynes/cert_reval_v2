@@ -153,11 +153,11 @@ class Dashboard extends Component {
     //=====================
     //TESTING
     //=====================
+    //NODEMAILER
+
     expiryCheck() {
         moment().format();
         let now = moment().hour(0).minute(0).second(0).millisecond(0);
-
-        let oneYearEmail = [];
 
         db.collection("certs").get()
         .then(snapshot => {
@@ -169,30 +169,32 @@ class Dashboard extends Component {
             return certs;
         })
         .then(certs => {
+            let toSend = [];
             certs.forEach(list => {
             let holders = list.holders;
             let name = list.name
-            console.log(holders);
                 holders.forEach(user => {
-                    let date = moment(user.issueDate);
-                    var expiry = moment(date).add(certs.Validity, 'y');
-                    var count = expiry.diff(now, 'y', true);
-                    console.log(count);
-                    if (count === -1) { // changing the number changes the expiry calculation
-                        oneYearEmail.push(
-                            {
-                                UID:    user.uid,
-                                Name:   name
-                            }
-                        );
-                    }
-                }) // End holders.forEach
-            }) // End certs.forEach
-            return ("Expiry Check Complete");
+                    let date = moment(user.expiryDate);
+                    var count = date.diff(now, 'months', true);
+                    if (count === 3 || count === 6 || count === 12 || count === 24) { // changing the number changes the expiry calculation
+                        toSend.push({UID: user.uid, Name: name, months: count});
+                    };
+                }); // End holders.forEach
+            }); // End certs.forEach
+            return (toSend);
         }) // End 2nd .then 
-        .then(test => {
-            console.log(oneYearEmail);
-        });
+        .then(toSend => {
+            toSend.forEach(user => {
+                db.collection("users").doc(user.UID).get()
+                .then(doc => {
+                    let a = doc.data();
+                    user.email = a.email;
+                    user.firstname = a.firstname;
+                    user.lastname = a.lastname;
+                });
+            });
+            return ("Complete");
+        }) // END .then
     }
 
 

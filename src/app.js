@@ -44,10 +44,10 @@ class App extends Component {
             expires: true,
             name: "Certificate of Competency",
             validity: 5,
-            holders: [
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2014-04-23" },
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2014-04-23" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2014-04-23" }
+            holders: [ // Dates for expiry in one year
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2019-04-28" },
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2019-04-28" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2019-04-28" }
             ]
         })
 
@@ -56,10 +56,10 @@ class App extends Component {
             expires: true,
             name: "Seafarer's Medical",
             validity: 2,
-            holders: [
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2017-04-23" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2017-04-23" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2017-04-23" }
+            holders: [ // Dates for expiry in six months
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-10-28" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-10-28" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-10-28" }
             ]
         })
 
@@ -68,10 +68,10 @@ class App extends Component {
             expires: true,
             name: "Helicopter Underwater Escape Training",
             validity: 2,
-            holders: [
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2017-04-24" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2017-04-24" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2017-04-24" }
+            holders: [ // Dates for expiry in one year
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2019-04-28" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2019-04-28" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2019-04-28" }
             ]
         })
 
@@ -80,10 +80,10 @@ class App extends Component {
             expires: true,
             name: "HAL Ballast Water Management Training",
             validity: 1,
-            holders: [
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-04-25" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-04-25" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-04-25" }
+            holders: [ // Dates for expiry in three months
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-07-28" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-07-28" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-07-28" }
             ]
         })
 
@@ -92,10 +92,10 @@ class App extends Component {
             expires: true,
             name: "GMDSS",
             validity: 5,
-            holders: [
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2014-04-26" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2014-04-26" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2014-04-26" }
+            holders: [ // Dates for expiry in two years
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2020-04-28" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2020-04-28" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2020-04-28" }
             ]
         })
 
@@ -106,7 +106,8 @@ class App extends Component {
                 { name: "D002", expiryDate: "2017-04-24" },
                 { name: "D003", expiryDate: "2018-04-25" },
                 { name: "D004", expiryDate: "2014-04-26" }
-            ]
+            ],
+            email: "bennypayne12@gmail.com"
         }, { merge: true });
 
         batch.set(user2, {
@@ -116,7 +117,8 @@ class App extends Component {
                 { name: "D002", expiryDate: "2017-04-24" },
                 { name: "D003", expiryDate: "2018-04-25" },
                 { name: "D004", expiryDate: "2014-04-26" }
-            ]
+            ],
+            email: "payne.joe@hotmail.co.nz"
         }, { merge: true });
 
         batch.set(user3, {
@@ -126,7 +128,8 @@ class App extends Component {
                 { name: "D002", expiryDate: "2017-04-24" },
                 { name: "D003", expiryDate: "2018-04-25" },
                 { name: "D004", expiryDate: "2014-04-26" }
-            ]
+            ],
+            email: "paynejosephanthony@gmail.com"
         }, { merge: true });
 
         batch.commit()

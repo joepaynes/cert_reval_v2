@@ -11,9 +11,11 @@ class IntroScreen extends Component {
 
         // grab uid from redux state to post to db
         let UID = this.props.user.uid;
+        let email = this.props.user.email
 
         // Post user details to db.
         db.collection("users").doc(UID).set({
+            email: email,
             uid: UID,
             firstname: values.firstname,
             lastname: values.lastname,
