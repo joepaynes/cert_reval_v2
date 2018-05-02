@@ -23,10 +23,12 @@ class App extends Component {
         this.state = {
             populated: false
         }
+
     }
 
     populateDB() {
         let batch = db.batch();
+        let self = this;
 
         //D000
         let D000 = db.collection("certs").doc("D000");
@@ -135,7 +137,7 @@ class App extends Component {
         batch.commit()
         .then(function() {
             console.log("Document's successfully written!");
-            this.setState({ populated: true });
+            self.setState({ populated: true });
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);
@@ -145,6 +147,7 @@ class App extends Component {
     render() {
         if (this.state.populated === false) {
             this.populateDB();
+            
         }
     
         return (
