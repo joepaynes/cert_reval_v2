@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { db } from "../index"
 import moment from "moment";
 import _ from "lodash";
-import * as actions from "../actions"
-import _ from 'lodash'
+import * as actions from "../actions";
 
 import { 
     USER_OBJECT
@@ -162,53 +161,6 @@ class Dashboard extends Component {
             console.log("Error fetching data, ", error)
         })
     }
-    //=====================
-    //TESTING
-    //=====================
-    //NODEMAILER
-
-    expiryCheck() {
-        moment().format();
-        let now = moment().hour(0).minute(0).second(0).millisecond(0);
-
-        db.collection("certs").get()
-        .then(snapshot => {
-            let certs = [];
-            snapshot.forEach(doc => {
-                certs.push(doc.data());
-            });
-            console.log(certs);
-            return certs;
-        })
-        .then(certs => {
-            let toSend = [];
-            certs.forEach(list => {
-            let holders = list.holders;
-            let name = list.name
-                holders.forEach(user => {
-                    let date = moment(user.expiryDate);
-                    var count = date.diff(now, 'months', true);
-                    if (count === 3 || count === 6 || count === 12 || count === 24) { // changing the number changes the expiry calculation
-                        toSend.push({UID: user.uid, Name: name, months: count});
-                    };
-                }); // End holders.forEach
-            }); // End certs.forEach
-            return (toSend);
-        }) // End 2nd .then 
-        .then(toSend => {
-            toSend.forEach(user => {
-                db.collection("users").doc(user.UID).get()
-                .then(doc => {
-                    let a = doc.data();
-                    user.email = a.email;
-                    user.firstname = a.firstname;
-                    user.lastname = a.lastname;
-                });
-            });
-            return ("Complete");
-        }) // END .then
-    }
-
 
     handleClickHome() {
         this.setState({ selected: "home" })
