@@ -34,7 +34,9 @@ export function SignUpUser ( {email, password} ) {
         // ========================
             // 1) SAVE UID TO STATE 
                 let uid = response.uid
+                let email = response.email
                 dispatch({ type: USER_UID, payload: uid})
+                dispatch({ type: USER_EMAIL, payload: email})
                 
             // 2) SET STATE TO INTRODUCTION/TUTORIAL ISLAND
                 dispatch({ type: INTRO_ACTIVE })

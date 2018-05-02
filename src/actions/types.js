@@ -13,6 +13,7 @@ export const CLEAR_AUTH_ERROR = "clear_auth_error"
 
 export const USER_UID = "user_uid"
 export const USER_OBJECT = "user_object"
+export const USER_EMAIL = "user_email"
 export const USER_LOADED = "user_loaded"
 
 //=======================================
