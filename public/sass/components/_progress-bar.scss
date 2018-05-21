@@ -1,0 +1,39 @@
+.progress-bar {
+
+
+    &__text {
+        display: flex;
+        align-items: center;
+
+        &--days {
+            font-weight: 600;
+            margin-right: auto;
+        }
+
+        &--dates {
+            color: var(--color-grey-dark-3);
+            font-weight: 400;
+            font-size: 75%;
+        }
+
+    }
+
+    &__bar {
+        height: .25rem;
+        background-color: #e9ecef;
+        border-radius: 3px;
+
+        display: flex;
+        overflow: hidden;
+
+        &--value {
+            height: .25rem;
+            background-color:#5eba00;
+
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}

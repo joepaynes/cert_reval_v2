@@ -12,7 +12,7 @@ import {
 
 import IntroScreen from "./intro"
 import Loader from "./loader"
-import CertForm from "./certForm"
+import CertWizard from "./certWizard"
 
 // MOCK UP COMPONENT
 
@@ -136,7 +136,7 @@ class Dashboard extends Component {
 
         if(this.props.dash.selected === "add-certificate") {
             return (
-                <CertForm/> 
+                <CertWizard/> 
             )
         }
     }

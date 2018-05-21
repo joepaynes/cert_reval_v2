@@ -15,6 +15,8 @@ class CertForm extends Component {
         // calculate expiry date
         let date = moment(values.issueDate);
         let expiry = moment(date).add(values.validity, 'y');
+        values.fileName = this.props.fileName;
+        values.storageURL = this.props.url;
         values.expiryDate = moment(expiry).format("YYYY-MM-DD");
         delete values.validity;
 

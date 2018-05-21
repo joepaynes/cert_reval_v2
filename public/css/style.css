@@ -115,6 +115,31 @@ a:visited {
   width: 500px;
   margin: 10px; }
 
+.progress-bar__text {
+  display: flex;
+  align-items: center; }
+  .progress-bar__text--days {
+    font-weight: 600;
+    margin-right: auto; }
+  .progress-bar__text--dates {
+    color: var(--color-grey-dark-3);
+    font-weight: 400;
+    font-size: 75%; }
+
+.progress-bar__bar {
+  height: .25rem;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  display: flex;
+  overflow: hidden; }
+  .progress-bar__bar--value {
+    height: .25rem;
+    background-color: #5eba00;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+
 .side-menu {
   height: 100vh;
   width: 20%;
