@@ -17,8 +17,15 @@ export const USER_EMAIL = "user_email"
 export const USER_LOADED = "user_loaded"
 
 //=======================================
+//             DASH TYPES
+//=======================================
+
+export const DASH_SELECTED = "dash_selected"
+
+//=======================================
 //             MISC TYPES
 //=======================================
 
 export const INTRO_ACTIVE = "intro_active"
 export const INTRO_UNACTIVE = "intro_unactive"
+

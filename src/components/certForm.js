@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import * as actions from "../actions"
 import { db, savedStore } from "../index"
 import moment from 'moment';
+// import FileInput from './fileInput';
 
 
 class CertForm extends Component {
@@ -18,8 +19,13 @@ class CertForm extends Component {
         values.expiryDate = moment(expiry).format("YYYY-MM-DD");
         delete values.validity;
 
+        console.log(this.fileInput);
+        values.fileName = this.fileInput.files[0].name;
+        console.log(values);
+
         // Push new cert to the array
         certArray.push(values);
+
         
         // *IMPORTANT*
         // AT THE MOMENT, LITERALLY REPLACES THE OLD ARRAY WITH THE NEW ARRAY, IT DOESN'T UPDATE IT SO ITS INNEFFICIENT IN THAT 
@@ -28,10 +34,12 @@ class CertForm extends Component {
         // Update old array with new cert array
         db.collection("users").doc(UID).update({
             "certificates": certArray
-        }).then(
+        }).then(a => {
             // Switch loading flag to load the new certificate that has been added to database
-            this.props.loadData()
-        )
+            this.props.loadData();
+            // Push user back to Database
+            this.props.dashSelected("home");
+        })
         .catch(function(error){
             console.log("Document did not write: ", error)
         })
@@ -53,6 +61,10 @@ class CertForm extends Component {
                     </div>
                     <div className="auth-form__form-field">
                         <Field component={renderField} type="number" name="validity" placeholder="5" label="Validity" />
+                    </div>
+                    <div className="auth-form__form-field">
+                        <Field  component={renderField} type="file" name="file" placeholder="Choose File" label="Upload Certificate" value={null}/>
+                        {/* <Field type="file" name="file" placeholder="Choose File" label="Upload Certificate" component={FileInput} /> */}
                     </div>
                     <button type="submit" className="auth-form__button">Add Certificate</button>
                 </form>

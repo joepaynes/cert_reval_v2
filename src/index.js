@@ -84,4 +84,5 @@ registerServiceWorker();
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const storageBucket = firebase.storage();
 export const savedStore = persistor

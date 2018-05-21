@@ -11,7 +11,8 @@ import {
     INTRO_ACTIVE,
     INTRO_UNACTIVE,
     USER_OBJECT,
-    USER_LOADED
+    USER_LOADED,
+    DASH_SELECTED
 } from "../actions/types"
 
 // ============================================================================================================
@@ -163,6 +164,19 @@ export function loadData() {
         dispatch({
             type: USER_LOADED,
             payload: false
+        })
+    }
+}
+
+// ============================================================================================================
+//                                                 DASH ACTIONS
+// ============================================================================================================
+
+export function dashSelected(selected) {
+    return function(dispatch) {
+        dispatch({
+            type: DASH_SELECTED,
+            payload: selected
         })
     }
 }

@@ -26,12 +26,13 @@ class Dashboard extends Component {
         // the user object has been loaded. In fact you might only need one control from redux state, and different components can flag
         // loading states when starting and ending operations, like updating, reading and writing to the database etc.
 
-        this.state = {
-            selected: "home",
-        }
+        // Below is now linked to redux state - dash.selected - intially set as "home"
+        ///////////////////////////////////
+        // this.state = {
+        //     selected: "home",
+        // }
 
         this.handleClickHome = this.handleClickHome.bind(this)
-        this.handleClickCerts = this.handleClickCerts.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
     }
 
@@ -99,7 +100,7 @@ class Dashboard extends Component {
     }
 
     renderContent() {
-        if(this.state.selected === "home") {
+        if(this.props.dash.selected === "home") {
             let certArr = this.props.state.user.instance.certificates
             let self = this
             // Map through certificate array to pull out and display certificate objects
@@ -138,7 +139,7 @@ class Dashboard extends Component {
 
         
 
-        if(this.state.selected === "add-certificate") {
+        if(this.props.dash.selected === "add-certificate") {
             return (
                 <CertForm/> 
             )
@@ -163,13 +164,10 @@ class Dashboard extends Component {
     }
 
     handleClickHome() {
-        this.setState({ selected: "home" })
-    }
-    handleClickCerts() {
-        this.setState({ selected: "certificates"})
+        this.props.dashSelected("home");
     }
     handleClickAddCert() {
-        this.setState({ selected: "add-certificate"})
+        this.props.dashSelected("add-certificate");
     }
 }
 
@@ -177,6 +175,7 @@ function mapStateToProps(state) {
     return {
         intro: state.intro.intro,
         user: state.user,
+        dash: state.dash,
         state: state   
     }
 }
