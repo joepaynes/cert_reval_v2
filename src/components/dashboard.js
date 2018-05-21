@@ -26,11 +26,6 @@ class Dashboard extends Component {
         // the user object has been loaded. In fact you might only need one control from redux state, and different components can flag
         // loading states when starting and ending operations, like updating, reading and writing to the database etc.
 
-        // Below is now linked to redux state - dash.selected - intially set as "home"
-        ///////////////////////////////////
-        // this.state = {
-        //     selected: "home",
-        // }
 
         this.handleClickHome = this.handleClickHome.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
