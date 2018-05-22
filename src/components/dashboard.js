@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { db } from "../index"
+import { db, storageBucket } from "../index"
 import moment from "moment";
 import _ from "lodash";
 import * as actions from "../actions";
@@ -29,6 +29,7 @@ class Dashboard extends Component {
 
         this.handleClickHome = this.handleClickHome.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
+        this.fetchFile = this.fetchFile.bind(this)
     }
 
     componentDidMount() {
@@ -98,6 +99,9 @@ class Dashboard extends Component {
         if(this.props.dash.selected === "home") {
             let certArr = this.props.state.user.instance.certificates
             let self = this
+
+
+
             // Map through certificate array to pull out and display certificate objects
             let certs = certArr.map(function(cert){
                return(
@@ -124,6 +128,12 @@ class Dashboard extends Component {
                         )
 
                     }}> Delete </button>
+                    {/* ++++++++++++++++ */}
+                    {/* DOWNLOAD BUTTON */}
+                    {/* ++++++++++++++++ */}
+                    <button onClick={() => {
+                        self.fetchFile(cert.fileName);
+                    }}> Download </button>
                 </div>
                )
             })
@@ -139,6 +149,29 @@ class Dashboard extends Component {
                 <CertWizard/> 
             )
         }
+    }
+
+    fetchFile(fileName) {
+        let uid = this.props.user.uid;
+
+        let root = storageBucket.ref();
+        root.child(`${uid}/${fileName}`).getDownloadURL()
+        .then(url => {
+            //Begin Download once URL returned
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = event => {
+                let blob = xhr.response;
+            };
+            xhr.open('GET', url);
+            xhr.send();
+        })
+        .catch(error => {
+            if(error.code == 404) {
+                alert(error.message);
+            }
+            console.log("Download failed: " + error.code + error.message);
+        })
     }
     
     fetchData() {

@@ -79,12 +79,11 @@ export function SignInUser ( {email, password} ) {
         // SUCCESSFUL SIGNIN LOGIC
         // ========================
             // 1 ) SAVE UID TO USER REDUCER
-                let uid = response.uid
-                dispatch({ type: USER_UID, payload: uid })
+            let uid = response.user.uid
+            dispatch({ type: USER_UID, payload: uid })
             // 2 ) SET USER LOADED FLAG TO FALSE
-                dispatch({ type: USER_LOADED, payload: false })
-    
-            // 3) PUSH THEM TO THE DASHBOARD
+            dispatch({ type: USER_LOADED, payload: false })    
+            // 3) PUSH THEM TO THE DASHBOARD 
             history.push("/dashboard");
       })
       .catch(function(error){

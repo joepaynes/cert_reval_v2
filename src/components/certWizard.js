@@ -72,15 +72,13 @@ class CertWizard extends Component {
     upload(fileInput) {
         let self = this;
 
+        // File or Blob named mountains.jpg
+        const file = fileInput
+
         //Flip Display State to Progress Bar
         this.setState({selected: "uploading"});
         // Save fileName to stat 
         this.setState({fileName: file.name});
-        let self = this;
-
-
-        // File or Blob named mountains.jpg
-        const file = fileInput
 
         //Root Reference
         var storageRef = storageBucket.ref();
