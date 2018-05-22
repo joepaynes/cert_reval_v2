@@ -101,7 +101,11 @@ class Dashboard extends Component {
             let self = this
 
 
-
+            if(certArr == undefined) {
+                return (
+                    <div>No Certificates</div>
+                )
+            }
             // Map through certificate array to pull out and display certificate objects
             let certs = certArr.map(function(cert){
                return(
@@ -175,7 +179,6 @@ class Dashboard extends Component {
     }
     
     fetchData() {
-        
         let uid = this.props.user.uid
 
         // USER QUERY

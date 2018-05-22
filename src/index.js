@@ -56,7 +56,7 @@ const firebaseConfig = {
   }; 
 
 // Initialize an instance of firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 // intialize firestore
 firebase.firestore();
@@ -65,13 +65,9 @@ firebase.firestore();
 // REACTDOM RENDER
 // ==========================================================================
 
-function onBeforeLift() {
-    console.log("Running")
-}
-
 ReactDOM.render(
     <Provider store={store}>
-        <PersistGate loading={<Loader />} persistor={persistor} onBeforeLift= { onBeforeLift }>
+        <PersistGate loading={<Loader />} persistor={persistor}>
             <App /> 
         </PersistGate>
     </Provider>

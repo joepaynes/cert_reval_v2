@@ -27,7 +27,8 @@ class IntroScreen extends Component {
         })
 
         // Revert to normal db state
-        this.props.endIntro()
+        this.props.endIntro();
+        this.props.loadData();
 
     }
     

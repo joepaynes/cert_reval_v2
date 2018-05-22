@@ -34,8 +34,8 @@ export function SignUpUser ( {email, password} ) {
         // SUCCESSFUL SIGNUP LOGIC
         // ========================
             // 1) SAVE UID TO STATE 
-                let uid = response.uid
-                let email = response.email
+                let uid = response.user.uid
+                let email = response.user.email
                 dispatch({ type: USER_UID, payload: uid})
                 dispatch({ type: USER_EMAIL, payload: email})
                 
