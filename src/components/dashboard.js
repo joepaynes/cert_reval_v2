@@ -13,6 +13,7 @@ import {
 import IntroScreen from "./intro"
 import Loader from "./loader"
 import CertWizard from "./certWizard"
+import Tracker from "./tracker"
 
 // MOCK UP COMPONENT
 
@@ -29,6 +30,7 @@ class Dashboard extends Component {
 
         this.handleClickHome = this.handleClickHome.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
+        this.handleClickTracker = this.handleClickTracker.bind(this)
         this.fetchFile = this.fetchFile.bind(this)
     }
 
@@ -78,6 +80,7 @@ class Dashboard extends Component {
                             <ul className="side-menu__links-list">
                                 <li className="side-menu__link"><button onClick={this.handleClickHome} className="side-menu__link--button"> Home </button></li>
                                 <li className="side-menu__link"><button onClick={this.handleClickAddCert} className="side-menu__link--button"> Add Certificate </button> </li>
+                                <li className="side-menu__link"><button onClick={this.handleClickTracker} className="side-menu__link--button"> Tracker </button> </li>
                             </ul>
                         </div>
 
@@ -153,6 +156,12 @@ class Dashboard extends Component {
                 <CertWizard/> 
             )
         }
+
+        if(this.props.dash.selected === "tracker") {
+            return (
+                <Tracker />
+            )
+        }
     }
 
     fetchFile(fileName) {
@@ -199,6 +208,9 @@ class Dashboard extends Component {
     }
     handleClickAddCert() {
         this.props.dashSelected("add-certificate");
+    }
+    handleClickTracker() {
+        this.props.dashSelected("tracker");
     }
 }
 

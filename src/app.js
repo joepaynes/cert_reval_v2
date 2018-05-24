@@ -15,6 +15,8 @@ import Dashboard from "./components/dashboard";
 import SignIn from "./components/signin";
 import SignUp from "./components/signup"; 
 import SignOut from "./components/signout";
+import CertBucket from "./components/certBucket";
+import NoMatch from "./components/404";
 
 class App extends Component {
     //State for DB Populate for testing
@@ -158,6 +160,8 @@ class App extends Component {
                     <Route path='/signin' component={SignIn} />
                     <Route path='/signup' component={SignUp} />
                     <Route path="/signout" component={SignOut} />
+                    <Route path="/certBucket/:id" component={CertBucket} />
+                    <Route component={NoMatch} />
                 </Switch>
             </Router>
         )
