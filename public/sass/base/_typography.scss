@@ -1,48 +1,22 @@
-h1 {
+h1, h2, h3, h4, h5, h6, {
     margin: 0;
 }
 
-.heading-primary {
-    font-size: 3.5rem;
-    text-transform: uppercase;
-    font-weight: 100;
-    margin-bottom: 3rem;
-}
-
-.heading-tertiary {
+.header-primary {
     font-size: 2rem;
-    font-weight: 100; 
+    font-weight: 100;
+    letter-spacing: .3rem;
     text-transform: uppercase;
-    margin-bottom: 3rem;
-    text-align: center;
 }
 
-.heading-tertiary::after {
-    content: " ";
-    background-color: $color-white;
-    display: block;
-    height: 2px;
-    width: 31%;
-    margin: 0 auto;
-    margin-top: 2rem;
+.header-massive {
+    font-size: 10rem;
+    font-weight: 100;
+    text-transform: uppercase;
 }
 
-.icon {
-    display: inline-block;
-    color: $color-black;
-    margin-right: 4rem;
-
-    &-big {
-        font-size: 350%;
-    }
-
-    &-bigger {
-        font-size: 500%;
-    }
-}
-
-a:link,
-a:visited {
-    text-decoration: none;
-
+.header-sub-massive {
+    font-size: 2.5rem;
+    font-weight: 100;
+    text-transform: uppercase; 
 }

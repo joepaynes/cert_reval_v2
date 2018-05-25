@@ -1,71 +1,39 @@
 .header {
-    height:10rem;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: white;
-    z-index: 1;
+    height: 7rem;
+    background-color: #fff;
+    border-bottom: var(--line);
 
-    &__logo-box {
-        height: 100%;
-        float: left;
-        width: 25%;
-    }
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
     &__logo {
-        padding-top: .5rem;
-        height: 75%;
+        margin-left: 2.5rem;
+        height: 5rem;
         width: auto;
-        display: block;
-        margin: 0 auto;
-        padding-top: 1.5rem;
+        margin-right: auto;
     }
 
-    &__links-box {
+    &--landing {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        height: 12rem;
+        width: 100%;
+        padding: 0 5rem;
+        
+        display: flex;
+        align-items: center;
+    }
+
+    &--links-box {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
         height: 100%;
-        width: 75%;
-        float: right;
+        margin-right: 2rem;
     }
 
-    &__links-list {
-        float: right;
-        height: 100%;
-
-    }
-
-    &__link:link,
-    &__link:visited {
-        display: inline-block;
-        margin-right: 5rem;
-        margin-top: 4.05rem;
-        padding-bottom: .5rem;
-        color: $color-white;
-        font-size: 1.7rem;
-        font-weight: 100;
-        text-transform: uppercase;
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border .2s;
-
-        &--black {
-            color: $color-black;
-        }
-
-    }
-
-    &__link:hover,
-    &__link:active {
-        border-bottom: 1px solid $color-white;
-
-        &--black {
-            border-bottom: 1px solid $color-black;
-        }
-
-    }
-
-    &__link:last-child {
-        margin-right: 7rem;
-    }
 }
-

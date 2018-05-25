@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { db, storageBucket } from "../index"
-import moment from "moment";
 import _ from "lodash";
 import * as actions from "../actions";
 
-import { 
-    USER_OBJECT
- } from "../actions/types"
-
-import IntroScreen from "./intro"
 import Loader from "./loader"
 import CertWizard from "./certWizard"
 
@@ -20,41 +14,34 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props)
-
-
         // Loading state will have to be completely relient on redux state, maybe have an initial load and then another load that says when
         // the user object has been loaded. In fact you might only need one control from redux state, and different components can flag
         // loading states when starting and ending operations, like updating, reading and writing to the database etc.
-
-
         this.handleClickHome = this.handleClickHome.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
         this.fetchFile = this.fetchFile.bind(this)
     }
 
-    componentDidMount() {
+    componentWillMount() {
          // Only run fetchdata if the dashboard is in loading state AND data hasn't been previously saved to redux state
          console.log(this.props.user.loaded)
          if (this.props.user.loaded === false) {
             this.fetchData()
-            return ( <Loader/> )  
         }
     }
 
     componentWillUpdate(nextProps) {
         // Will run when adding, deleting, or modifying a certificate.
+        console.log(this.props.user.loaded)
         if (nextProps.user.loaded === false) {
            this.fetchData()
-           return ( <Loader/> )  
        }
     }
 
 
     render() {
-        if(this.props.intro === true) {
-            return(<IntroScreen/>)
-        }
-        else if (this.props.user.loaded === true) {  
+        console.log(this.props.user)
+        if (this.props.user.loaded === true) {  
             // REF \/
             let user = this.props.user.instance
             return (
@@ -72,7 +59,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="side-menu">
                         <div className="side-menu__logo-box">
-                            <img className="side-menu__logo" src="img/logo-white.png"/>
+                            <img className="side-menu__logo" src="img/logo-white.png" alt="certify logo"/>
                         </div>
                         <div className="side-menu__links-container">
                             <ul className="side-menu__links-list">
@@ -101,7 +88,7 @@ class Dashboard extends Component {
             let self = this
 
 
-            if(certArr == undefined) {
+            if(certArr === undefined) {
                 return (
                     <div>No Certificates</div>
                 )
@@ -171,7 +158,7 @@ class Dashboard extends Component {
             xhr.send();
         })
         .catch(error => {
-            if(error.code == 404) {
+            if(error.code === 404) {
                 alert(error.message);
             }
             console.log("Download failed: " + error.code + error.message);
@@ -179,15 +166,14 @@ class Dashboard extends Component {
     }
     
     fetchData() {
-        let uid = this.props.user.uid
-
+        let uid = this.props.user.uid; //Grabs uid from redux state
         // USER QUERY
         db.collection("users").doc(uid).get()
         .then(doc => {
                 let userObject = doc.data()
                 // Save data to redux state
-                this.props.saveToState(userObject)
-                this.props.userLoaded()
+                this.props.saveToState(userObject) // Saves data to user.instance
+                this.props.userLoaded() // Flips user.loaded to true
         })
         .catch(function(error){
             console.log("Error fetching data, ", error)
@@ -204,7 +190,6 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
     return {
-        intro: state.intro.intro,
         user: state.user,
         dash: state.dash,
         state: state   

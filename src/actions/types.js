@@ -21,11 +21,3 @@ export const USER_LOADED = "user_loaded"
 //=======================================
 
 export const DASH_SELECTED = "dash_selected"
-
-//=======================================
-//             MISC TYPES
-//=======================================
-
-export const INTRO_ACTIVE = "intro_active"
-export const INTRO_UNACTIVE = "intro_unactive"
-

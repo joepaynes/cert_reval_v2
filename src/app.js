@@ -12,9 +12,8 @@ import requireAuth from "./components/require_auth"
 //PAGES
 import Landing from "./components/landing";
 import Dashboard from "./components/dashboard";
-import SignIn from "./components/signin";
-import SignUp from "./components/signup"; 
-import SignOut from "./components/signout";
+import Entrance from "./pages/entrance";
+import SignOut from "./pages/signout";
 
 class App extends Component {
     //State for DB Populate for testing
@@ -155,8 +154,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path ='/' component={Landing} />
                     <Route path='/dashboard' component={requireAuth(Dashboard)} />
-                    <Route path='/signin' component={SignIn} />
-                    <Route path='/signup' component={SignUp} />
+                    <Route path='/:direction(signin|signup)' component={Entrance} />
                     <Route path="/signout" component={SignOut} />
                 </Switch>
             </Router>

@@ -40,7 +40,6 @@ import { PersistGate } from 'redux-persist/integration/react'
     const storeEnhancer = compose(applyMiddleware(thunk));
     let store = createStore(persistedReducer, storeEnhancer)
     let persistor = persistStore(store)
-
 // ==========================================================================
 // FIREBASE, FIRESTORE SETUP
 // ==========================================================================
@@ -81,4 +80,4 @@ registerServiceWorker();
 export const auth = firebase.auth();
 export const db = firebase.firestore();
 export const storageBucket = firebase.storage();
-export const savedStore = persistor
+export let savedStore = persistor

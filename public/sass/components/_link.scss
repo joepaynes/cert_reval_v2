@@ -1,0 +1,20 @@
+.link,
+.link:link,
+.link:visited, {
+
+    &:not(:last-child){
+        margin-right: 1rem;
+    }
+
+    padding: 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+
+}
+
+.link:hover,
+.link:active, {
+
+} 
