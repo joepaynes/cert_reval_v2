@@ -1,0 +1,9 @@
+.sidebar {
+    background-color: var(--color-grey-dark-1);
+    // the element should not grow or shrink but take up 18% of the container
+    flex: 0 0 18%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

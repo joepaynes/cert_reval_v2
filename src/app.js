@@ -11,7 +11,7 @@ import { db } from "./index"
 import requireAuth from "./components/require_auth"
 //PAGES
 import Landing from "./components/landing";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./pages/dashboard";
 import Entrance from "./pages/entrance";
 import SignOut from "./pages/signout";
 

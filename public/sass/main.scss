@@ -7,16 +7,21 @@
 @import "base/_typography.scss";
 @import "base/_utilities.scss";
 
-@import "components/_background-video.scss";
-@import "components/_button.scss";
-@import "components/_certificate";
-@import "components/_progress-bar";
-@import "components/_side-menu.scss";
+@import "components/background-video.scss";
+@import "components/button.scss";
+@import "components/certificate";
+@import "components/progress-bar";
+@import "components/side-nav.scss";
 @import "components/link";
 @import "components/jumbotron";
+@import "components/user-nav";
+@import "components/widget";
+@import "components/cert-table";
+@import "components/card";
 
-@import "layout/_footer.scss";
-@import "layout/_header.scss";
+@import "layout/footer.scss";
+@import "layout/header.scss";
+@import "layout/side-bar.scss";
 
 @import "pages/_dashboard.scss";
 @import "pages/_entrance.scss";

@@ -1,35 +1,42 @@
-.button {
+.button-text {
+   
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    font-size: 1.3rem;
+    cursor: pointer;
 
-    &,
-    &:link,
-    &:visited {
-        display: inline-block;
-        height: 5rem;
-        width: 20rem;
-        border-radius: 2rem;
-        text-decoration: none;
-        font-size: 2rem;
-        text-transform: uppercase;
-        transition: all .2s
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+    &__icon {
+        height: 1.2rem;
+        width: 1.2rem;
+        margin-top: .2rem;
+        margin-right: .7rem;
     }
 
-    &:active {
-        transform: translateY(-1px);
-        box-shadow: 0 .5rem 1rem rgba($color-black,.2)
+    &:focus {
+        outline: none;
     }
 
-    &-orange {
-        background-color: $color-orange;
-        color: $color-white;
-    }
 
-    &-video {
-        padding-top: 1.5rem;
+    &-card {
+        
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
     }
-
+    
 }
