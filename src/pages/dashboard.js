@@ -26,10 +26,17 @@ class Dashboard extends Component {
         this.handleClickHome = this.handleClickHome.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
         this.fetchFile = this.fetchFile.bind(this)
+        this.toggleTable = this.toggleTable.bind(this)
+        this.toggleCards = this.toggleCards.bind(this)
+        
+        this.state = {
+            view: "table"
+        }
     }
 
     componentWillMount() {
          // Only run fetchdata if the dashboard is in loading state AND data hasn't been previously saved to redux state
+         console.log(this.props)
          if (this.props.user.loaded === false) {
             this.fetchData()
         }
@@ -57,18 +64,11 @@ class Dashboard extends Component {
                             <SideBar />
                             <div className="dashboard__view">
                             <WidgetBoard />
+                            <button onClick={this.toggleTable}>table</button> 
+                            <button onClick={this.toggleCards}>cards</button>
                             {this.renderContent()}
-                            <CertCards />
                             </div>
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        {/* <div className="dashboard__content-container">
-                            {this.renderContent()}
-                        </div> */}
                     </div>
                 </div>
             )
@@ -79,11 +79,32 @@ class Dashboard extends Component {
 
     }
 
+    toggleTable() {
+        this.setState({
+            view: "table"
+        })
+    }
+
+    toggleCards() {
+        this.setState({
+            view: "cards"
+        })
+    }
+
     renderContent() {
+        let self = this;
         if(this.props.dash.selected === "home") {
-            return (
-                <CertTables />
-            )
+            if (self.state.view === "table") {
+                return (
+                    <CertTables/>
+                )
+            }
+            if (self.state.view === "cards") {
+                return (
+                    <CertCards/>
+                )
+            }
+            return 
         }
 
         if(this.props.dash.selected === "add-certificate") {

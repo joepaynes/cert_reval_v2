@@ -41,22 +41,22 @@ renderCertificates() {
 
     let certificates = certArr.map(cert => {
 
-        //Default cases for testing purposes
-        if (!cert.no) {
-            cert.no = 123456789
-        }
-        if (!cert.issuer) {
-            cert.issuer = "Maritime School"
-        }
-        if (!cert.issueDate) {
-            cert.issueDate = "2018-04-25"
-        }
-        if (!cert.daysToExpire) {
-            cert.daysToExpire = 50
-        }
+        // Default cases for testing purposes
+        // if (!cert.no) {
+        //     cert.no = 123456789
+        // }
+        // if (!cert.issuer) {
+        //     cert.issuer = "Maritime School"
+        // }
+        // if (!cert.issueDate) {
+        //     cert.issueDate = "2018-04-25"
+        // }
+        // if (!cert.daysToExpire) {
+        //     cert.daysToExpire = 50
+        // }
 
         return (
-            <tr className="cert">
+            <tr className="cert" key={cert.no}>
                 {/* NEEDS TO BE THUMBNAIL OF UPLOADED CERTIFICATE OR DEFAULT TO PLACEHOLDER - CHANGE */}
                 <td><img className="cert-table__image" src="img/Herb.jpeg"/></td>
                 {/* CERT NUMBER OR DEFAULT */}
