@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { db, storageBucket } from "../index"
+import { db, storageBucket } from "../index";
 import _ from "lodash";
 import * as actions from "../actions";
 
@@ -25,10 +25,14 @@ class Dashboard extends Component {
         // loading states when starting and ending operations, like updating, reading and writing to the database etc.
         this.handleClickHome = this.handleClickHome.bind(this)
         this.handleClickAddCert = this.handleClickAddCert.bind(this)
-        this.fetchFile = this.fetchFile.bind(this)
         this.toggleTable = this.toggleTable.bind(this)
         this.toggleCards = this.toggleCards.bind(this)
-        
+
+        //Certificate Methods - Delete, Edit, Delete
+        this.deleteCertificate = this.deleteCertificate.bind(this);
+        this.downloadCertificate = this.downloadCertificate.bind(this);
+        this.addCert = this.addCert.bind(this);
+
         this.state = {
             view: "table"
         }
@@ -66,6 +70,7 @@ class Dashboard extends Component {
                             <WidgetBoard />
                             <button onClick={this.toggleTable}>table</button> 
                             <button onClick={this.toggleCards}>cards</button>
+                            <button onClick={this.addCert}>Add Certificate</button>
                             {this.renderContent()}
                             </div>
                         </div>
@@ -77,6 +82,10 @@ class Dashboard extends Component {
             return (<Loader />)
         } 
 
+    }
+
+    addCert() {
+        this.props.dashSelected("add-certificate");
     }
 
     toggleTable() {
@@ -96,12 +105,12 @@ class Dashboard extends Component {
         if(this.props.dash.selected === "home") {
             if (self.state.view === "table") {
                 return (
-                    <CertTables/>
+                    <CertTables delete={this.deleteCertificate} download={this.downloadCertificate} />
                 )
             }
             if (self.state.view === "cards") {
                 return (
-                    <CertCards/>
+                    <CertCards delete={this.deleteCertificate} download={this.downloadCertificate}/>
                 )
             }
             return 
@@ -114,7 +123,26 @@ class Dashboard extends Component {
         }
     }
 
-    fetchFile(fileName) {
+    // ============================================
+    // Certificate Methods - Edit, Delete, Download
+    // ============================================
+
+    deleteCertificate(name) {
+        let certArray = this.props.user.instance.certificates
+        let UID = this.props.user.instance.uid
+        // Find the index number of the cert object by searching for name (can modify search later on)
+        let indexNo = _.findIndex(certArray, function(o){return o.name === name})
+        // Remove the certificate object from the array.
+        certArray.splice(indexNo, 1)
+        // Update Database with new array
+        db.collection("users").doc(UID).update({"certificates": certArray})
+        .then(
+        // Switch loading flag to load the new certificate array from db
+        this.props.loadData()
+        )
+    }
+
+    downloadCertificate(fileName) {
         let uid = this.props.user.uid;
 
         let root = storageBucket.ref();
@@ -133,9 +161,13 @@ class Dashboard extends Component {
             if(error.code === 404) {
                 alert(error.message);
             }
-            console.log("Download failed: " + error.code + error.message);
+            alert("Download failed: " + error.code + " | " + error.message);
         })
     }
+
+    // ============================================
+    // END of Certificate Methods
+    // ============================================
     
     fetchData() {
         let uid = this.props.user.uid; //Grabs uid from redux state

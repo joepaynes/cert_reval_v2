@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Edit, Delete } from "../svg/sprites"
 import { connect } from "react-redux";
+import moment from "moment";
 import * as actions from "../../actions"
 
 class CertCards extends Component {
@@ -19,14 +20,21 @@ class CertCards extends Component {
         }
         let cards = certArr.map(cert => {
 
+            // Calculation for progress bar and display must be recalculated everytime dash loads
+            let now = moment().hour(0).minute(0).second(0).millisecond(0);
+            cert.daysToExpire = moment(cert.expiryDate).diff(moment(now), 'days');
+            let totalDays = moment(cert.expiryDate).diff(moment(cert.issueDate), 'days')
+            let percentage = Math.floor( (cert.daysToExpire / totalDays) * 100 );
+
             return (
-                <li className="cards__item">
-                    <div className="card" key={cert.no}>
+                <li className="cards__item" key={cert.no}>
+                    <div className="card">
                         <div className="card__header">
                             <h1 className="header-primary">STCW</h1>
                             <div className="card__buttons">
                                 <button className="button-text button-text-card"><div className="button-text__content"><Edit/>Edit</div></button>
-                                <button className="button-text button-text-card"><div className="button-text__content"><Delete/>Delete</div></button>
+                                <button onClick={()=>{self.props.delete(cert.name)}} className="button-text button-text-card"><div className="button-text__content"><Delete/>Delete</div></button>
+                                <button onClick={() => {self.props.download(cert.fileName);}} className="button-text button-text-card"><div className="button-text__content">Download</div></button>
                             </div>
                         </div>
                         <div className="card__content">
@@ -40,15 +48,14 @@ class CertCards extends Component {
                             <div className="progress-bar">
                                 <div className="progress-bar__text">
                                     <div className="progress-bar__text--days progress-bar__text--days--card">
-                                        {/* FUNCTION HERE TO CALCULATE DAYS*/}
-                                        50 Days
+                                        {cert.daysToExpire + "Days"}
                                     </div>
                                     <div className="progress-bar__text--dates progress-bar__text--dates--card">
                                         {cert.issueDate} - {cert.expiryDate}
                                     </div>
                                 </div>
                                 <div className="progress-bar__bar progress-bar__bar--card">
-                                    <div className="progress-bar__bar--value progress-bar__bar--value--card" style={{width: "97%"}}>
+                                    <div className="progress-bar__bar--value progress-bar__bar--value--card" style={{width: percentage + "%"}}>
                                     </div>
                                 </div>
                             </div>

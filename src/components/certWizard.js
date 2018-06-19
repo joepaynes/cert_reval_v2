@@ -21,11 +21,16 @@ class CertWizard extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.upload = this.upload.bind(this);
+        this.skip = this.skip.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
         this.upload(this.fileInput.files[0]);
+    }
+
+    skip() {
+        this.setState({selected: "2 of 2"});
     }
 
     render() {
@@ -39,6 +44,7 @@ class CertWizard extends Component {
                             <input type="file" id="file" name="file" ref={input => {this.fileInput = input;}} />
                         </div>
                         <div>
+                            <button onClick={this.skip}>Skip</button>
                             <button type="submit">Submit</button>
                         </div>
                     </form>
@@ -140,7 +146,6 @@ class CertWizard extends Component {
 //Unsure if I need access to Redux Store or actions at this stage 
 function mapStateToProps(state) {
     return {
-        intro: state.intro.intro,
         user: state.user,
         dash: state.dash,
         state: state   

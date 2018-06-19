@@ -46,9 +46,9 @@ class App extends Component {
             name: "Certificate of Competency",
             validity: 5,
             holders: [ // Dates for expiry in one year
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2019-04-28" },
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2019-04-28" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2019-04-28" }
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2019-06-20" },
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2019-06-20" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2019-06-20" }
             ]
         })
 
@@ -58,9 +58,9 @@ class App extends Component {
             name: "Seafarer's Medical",
             validity: 2,
             holders: [ // Dates for expiry in six months
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-10-28" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-10-28" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-10-28" }
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-12-21" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-12-21" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-12-21" }
             ]
         })
 
@@ -70,9 +70,9 @@ class App extends Component {
             name: "Helicopter Underwater Escape Training",
             validity: 2,
             holders: [ // Dates for expiry in one year
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2019-04-28" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2019-04-28" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2019-04-28" }
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2019-06-22" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2019-06-22" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2019-06-22" }
             ]
         })
 
@@ -82,9 +82,9 @@ class App extends Component {
             name: "HAL Ballast Water Management Training",
             validity: 1,
             holders: [ // Dates for expiry in three months
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-07-28" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-07-28" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-07-28" }
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2018-09-23" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2018-09-23" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2018-09-23" }
             ]
         })
 
@@ -94,41 +94,41 @@ class App extends Component {
             name: "GMDSS",
             validity: 5,
             holders: [ // Dates for expiry in two years
-                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2020-04-28" },
-                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2020-04-28" },
-                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2020-04-28" }
+                { uid: "48zonakRvtN7snhLe4ajE0BAc9t1", expiryDate: "2020-06-24" },
+                { uid: "WkR7Fz90nVTCHMMeaXNPkVf0GVi2", expiryDate: "2020-06-24" },
+                { uid: "gmlgzhlve8RvN37g9UqQUXkn28y1", expiryDate: "2020-06-24" }
             ]
         })
 
         batch.set(user1, {
             certificates: [
-                { name: "D000", expiryDate: "2014-04-22" },
-                { name: "D001", expiryDate: "2017-04-23" },
-                { name: "D002", expiryDate: "2017-04-24" },
-                { name: "D003", expiryDate: "2018-04-25" },
-                { name: "D004", expiryDate: "2014-04-26" }
+                { name: "D000", issueDate: "2013-06-20", no: "1234", expiryDate: "2018-06-20" },
+                { name: "D001", issueDate: "2014-06-20", no: "1235", expiryDate: "2020-06-20" },
+                { name: "D002", issueDate: "2015-06-20", no: "1236", expiryDate: "2019-06-20" },
+                { name: "D003", issueDate: "2016-06-20", no: "1237", expiryDate: "2020-06-20" },
+                { name: "D004", issueDate: "2017-06-20", no: "1238", expiryDate: "2019-06-20" }
             ],
             email: "bennypayne12@gmail.com"
         }, { merge: true });
 
         batch.set(user2, {
             certificates: [
-                { name: "D000", expiryDate: "2014-04-22" },
-                { name: "D001", expiryDate: "2017-04-23" },
-                { name: "D002", expiryDate: "2017-04-24" },
-                { name: "D003", expiryDate: "2018-04-25" },
-                { name: "D004", expiryDate: "2014-04-26" }
+                { name: "D000", issueDate: "2013-06-20", no: "1234", expiryDate: "2018-06-20" },
+                { name: "D001", issueDate: "2014-06-20", no: "1235", expiryDate: "2020-06-20" },
+                { name: "D002", issueDate: "2015-06-20", no: "1236", expiryDate: "2019-06-20" },
+                { name: "D003", issueDate: "2016-06-20", no: "1237", expiryDate: "2020-06-20" },
+                { name: "D004", issueDate: "2017-06-20", no: "1238", expiryDate: "2019-06-20" }
             ],
             email: "payne.joe@hotmail.co.nz"
         }, { merge: true });
 
         batch.set(user3, {
             certificates: [
-                { name: "D000", expiryDate: "2014-04-22" },
-                { name: "D001", expiryDate: "2017-04-23" },
-                { name: "D002", expiryDate: "2017-04-24" },
-                { name: "D003", expiryDate: "2018-04-25" },
-                { name: "D004", expiryDate: "2014-04-26" }
+                { name: "D000", issueDate: "2013-06-20", no: "1234", expiryDate: "2018-06-20" },
+                { name: "D001", issueDate: "2014-06-20", no: "1235", expiryDate: "2020-06-20" },
+                { name: "D002", issueDate: "2015-06-20", no: "1236", expiryDate: "2019-06-20" },
+                { name: "D003", issueDate: "2016-06-20", no: "1237", expiryDate: "2020-06-20" },
+                { name: "D004", issueDate: "2017-06-20", no: "1238", expiryDate: "2019-06-20" }
             ],
             email: "paynejosephanthony@gmail.com"
         }, { merge: true });
