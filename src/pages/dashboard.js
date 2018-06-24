@@ -13,6 +13,7 @@ import CertTables from '../components/dashboard/cert_tables';
 import CertCards from '../components/dashboard/cert_cards';
 import Loader from '../components/loader';
 import CertWizard from "../components/certWizard";
+import Tracker from "../components/dashboard/tracker";
 
 // MOCK UP COMPONENT
 
@@ -23,10 +24,11 @@ class Dashboard extends Component {
         // Loading state will have to be completely relient on redux state, maybe have an initial load and then another load that says when
         // the user object has been loaded. In fact you might only need one control from redux state, and different components can flag
         // loading states when starting and ending operations, like updating, reading and writing to the database etc.
-        this.handleClickHome = this.handleClickHome.bind(this)
-        this.handleClickAddCert = this.handleClickAddCert.bind(this)
+
+        //Certificate Views
         this.toggleTable = this.toggleTable.bind(this)
         this.toggleCards = this.toggleCards.bind(this)
+        this.view = this.view.bind(this)
 
         //Certificate Methods - Delete, Edit, Delete
         this.deleteCertificate = this.deleteCertificate.bind(this);
@@ -67,10 +69,6 @@ class Dashboard extends Component {
                         <div className="content">
                             <SideBar />
                             <div className="dashboard__view">
-                            <WidgetBoard />
-                            <button onClick={this.toggleTable}>table</button> 
-                            <button onClick={this.toggleCards}>cards</button>
-                            <button onClick={this.addCert}>Add Certificate</button>
                             {this.renderContent()}
                             </div>
                         </div>
@@ -100,25 +98,42 @@ class Dashboard extends Component {
         })
     }
 
-    renderContent() {
+    view () {
         let self = this;
+        if (self.state.view === "table") {
+            return (
+                <CertTables delete={this.deleteCertificate} download={this.downloadCertificate} />
+            )
+        }
+        if (self.state.view === "cards") {
+            return (
+                <CertCards delete={this.deleteCertificate} download={this.downloadCertificate}/>
+            )
+        }
+    }
+
+    renderContent() {
         if(this.props.dash.selected === "home") {
-            if (self.state.view === "table") {
-                return (
-                    <CertTables delete={this.deleteCertificate} download={this.downloadCertificate} />
-                )
-            }
-            if (self.state.view === "cards") {
-                return (
-                    <CertCards delete={this.deleteCertificate} download={this.downloadCertificate}/>
-                )
-            }
-            return 
+            return (
+                <div>
+                    <WidgetBoard />
+                    <button onClick={this.toggleTable}>table</button> 
+                    <button onClick={this.toggleCards}>cards</button>
+                    <button onClick={this.addCert}>Add Certificate</button>
+                    {this.view()}
+                </div>
+            )
         }
 
         if(this.props.dash.selected === "add-certificate") {
             return (
                 <CertWizard/> 
+            )
+        }
+
+        if(this.props.dash.selected === "tracker") {
+            return (
+                <Tracker /> 
             )
         }
     }
@@ -182,13 +197,6 @@ class Dashboard extends Component {
         .catch(function(error){
             console.log("Error fetching data, ", error)
         })
-    }
-
-    handleClickHome() {
-        this.props.dashSelected("home");
-    }
-    handleClickAddCert() {
-        this.props.dashSelected("add-certificate");
     }
 }
 

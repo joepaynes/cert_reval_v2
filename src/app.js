@@ -14,6 +14,8 @@ import Landing from "./components/landing";
 import Dashboard from "./pages/dashboard";
 import Entrance from "./pages/entrance";
 import SignOut from "./pages/signout";
+import CertBucket from "./pages/certBucket";
+import NoMatch from "./pages/404";
 
 class App extends Component {
     //State for DB Populate for testing
@@ -156,6 +158,8 @@ class App extends Component {
                     <Route path='/dashboard' component={requireAuth(Dashboard)} />
                     <Route path='/:direction(signin|signup)' component={Entrance} />
                     <Route path="/signout" component={SignOut} />
+                    <Route path="/certBucket/:id" component={CertBucket} />
+                    <Route component={NoMatch} />
                 </Switch>
             </Router>
         )
