@@ -79,9 +79,11 @@ class CertBucket extends Component {
                 fetchCredentials({uid, infoIP, key})
                 .then(res => {
                     console.log(res);
-                    if( res.data.pass === true ) {
+                    if( res.data.pass === true && res.data.certs !== null ) {
                     self.setState({data: res.data.certs, loaded: true, pass: true});
                     callback();
+                    } else if (res.data.certs === null) {
+                        self.setState({pass: true, noCerts: true});
                     } else {
                     self.setState({pass: false, loaded: true});
                     alert("You are not authorised to view this data, please generate a new link");
@@ -125,6 +127,13 @@ class CertBucket extends Component {
             return (
                 <div>
                     {this.renderCerts()}
+                </div>
+            )
+        }
+        else if (this.state.noCerts === true ) {
+            return (
+                <div>
+                    Hey man, you ain't got no certs
                 </div>
             )
         }

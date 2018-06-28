@@ -48,7 +48,8 @@ export function SignUpUser (values) {
                     firstname: values.firstname,
                     lastname: values.lastname,
                     industry: values.industry,
-                    dob: values.DOB
+                    dob: values.DOB,
+                    trackerData: []
                 })
                 // Successful Write
                 .then(a => {
